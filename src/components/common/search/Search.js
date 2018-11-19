@@ -11,7 +11,7 @@ class Search extends Component {
   render () {
     return (
       <SearchContainer>
-        <SearchContent>
+        <SearchContent { ...this.props }>
           <img src={search} alt=""/>
           <span>想吃什么搜这里，川菜</span>
         </SearchContent>

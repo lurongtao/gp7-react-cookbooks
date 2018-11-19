@@ -9,7 +9,7 @@ const SearchContainer = styled.div `
 const SearchContent = border({
   component: styled.div `
     height: .4rem;
-    background: #fff;
+    background: ${ props => props.bgcolor || '#fff' };
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,8 @@ const SearchContent = border({
     }
   `,
   color: '#ee7530',
-  radius: 6
+  radius: 6,
+  width: props => props.border ? '1px' : '0px'
 })
 
 export {

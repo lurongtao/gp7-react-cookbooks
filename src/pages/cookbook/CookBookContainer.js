@@ -18,7 +18,7 @@ class CookBookContainer extends Component {
         <SwiperContainer>
           <img src={swiperImg} alt=""/>
         </SwiperContainer>
-        <Search></Search>
+        <Search border={true}></Search>
       </HomeContainer>
     )
   }

@@ -11,12 +11,13 @@ import more from 'images/more.png'
 import moreActive from 'images/more-active.png'
 
 import { CookBookContainer as CookBook } from 'pages/cookbook'
+import { MenuContainer as Menu } from 'pages/menu'
 
 export class HomeContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'cookbooks',
+      selectedTab: 'category',
       fullScreen: true,
     }
   }
@@ -78,7 +79,7 @@ export class HomeContainer extends Component {
             }}
             data-seed="logId1"
           >
-            <div>tab2</div>
+            <Menu></Menu>
           </TabBar.Item>
           <TabBar.Item
             icon={
