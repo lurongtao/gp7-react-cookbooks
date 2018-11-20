@@ -4,11 +4,13 @@ import border from 'components/styled/border'
 
 const MenuWrapper = styled.div `
   height: 100%;
+  width: 100%;
   background: #fff;
   display: flex;
   flex-direction: column;
   > div:nth-child(3) {
     position: relative;
+    flex: 1;
   }
 `
 
@@ -59,6 +61,7 @@ const MenuList = border({
   component: styled.div `
     flex: 1;
     display: flex;
+    width: 100%;
     position: absolute !important;
   `,
   color: '#ddd',

@@ -1,5 +1,7 @@
-import CookBookContainer from './CookBookContainer'
+import CookBookContainer from './views/CookBookContainer'
+import reducer from './reducer'
 
 export {
-  CookBookContainer
+  CookBookContainer,
+  reducer
 }

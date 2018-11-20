@@ -7,6 +7,8 @@ import {
   MenuListContent
 } from './styledComponent.js'
 
+import wrapperAnimate from 'components/highorder/wrapperAnimate'
+
 class MenuMaterial extends Component {
   render () {
     return (
@@ -46,4 +48,4 @@ class MenuMaterial extends Component {
   }
 }
 
-export default MenuMaterial
+export default wrapperAnimate(MenuMaterial)

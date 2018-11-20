@@ -3,16 +3,10 @@ import React, { Component } from 'react'
 import Search from 'components/common/search/Search'
 import MenuCategory from './MenuCategory'
 import MenuMaterial from './MenuMaterial'
-import {
-  TransitionGroup, 
-  CSSTransition
-} from "react-transition-group";
 
 import { 
   Route,
-  withRouter,
-  Switch,
-  Redirect
+  withRouter
 } from 'react-router-dom'
 
 import {
@@ -54,25 +48,11 @@ class MenuContainer extends Component {
           </MenuNav>
         </MenuHeader>
         <Search bgcolor='#efefef'></Search>
-
-        <TransitionGroup>
-            <CSSTransition
-              key={this.props.location.key}
-              classNames={{
-                enter: 'animated',
-                enterActive: 'fadeInRight',
-                exit: 'animated',
-                exitActive: 'fadeOutLeft'
-              }}
-              timeout={1000}
-            >
-              <Switch>
-                <Redirect exact from="/" to="/category"></Redirect>
-                <Route path='/category' component={MenuCategory}/>
-                <Route path='/material' component={MenuMaterial}/>
-              </Switch>
-          </CSSTransition>
-        </TransitionGroup>
+        <div>
+          <Route path='/' exact children={props => <MenuCategory {...props} />}/>
+          <Route path='/category' children={props => <MenuCategory {...props} />}/>
+          <Route path='/material' children={props => <MenuMaterial {...props} />}/>
+        </div>
       </MenuWrapper>
     )
   }
@@ -89,7 +69,8 @@ class MenuContainer extends Component {
     }, 300)
 
     this.props.history.push(
-      dir === 'left' ? 'category' : 'material'
+      dir === 'left' ? 'category' : 'material',
+      { dir }
     )
   }
 }
