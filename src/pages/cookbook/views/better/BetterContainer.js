@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { BetterWrapper, Grid } from './styledComponent.js'
+import { BetterWrapper, Grid, Title } from './styledComponent.js'
 
 const betterListGetter = (data) => {
   let betterList = data ? data.slice(0, 20) : []
@@ -10,8 +10,8 @@ const betterListGetter = (data) => {
       icon: value.img,
       id: value.id,
       name: value.name,
-      all_click: `浏览量：${value.all_click}`,
-      favorites: `收藏量：${value.favorites}`,
+      all_click: `${value.all_click}浏览`,
+      favorites: `${value.favorites}收藏`,
     }
   })
 }
@@ -26,11 +26,24 @@ class BetterContainer extends Component {
   render () {
     return (
       <BetterWrapper>
-        <h1>精品好菜</h1>
+        <Title>精品好菜</Title>
         <Grid>
           {
             this.props.betterList.map((value) => {
-              return <li key={value.id}>{value.name}</li>
+              return (
+                <li key={value.id}>
+                  <div>
+                    <img src={value.icon} alt={value.name}/>
+                  </div>
+                  <div>
+                    <h3>{value.name}</h3>
+                    <p>
+                      <span>{value.all_click}</span>
+                      <span>{value.favorites}</span>
+                    </p>
+                  </div>
+                </li>
+              )
             })
           }
         </Grid>

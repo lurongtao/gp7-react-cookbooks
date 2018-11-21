@@ -4,8 +4,8 @@ import border from 'components/styled/border'
 const HotMenuWrap = styled.div `
   background: #fff;
   .am-grid.am-grid-square .am-grid-item .am-grid-item-inner-content .am-grid-icon {
-    width: .6rem !important;
-    height: .6rem;
+    width: 66% !important;
+    height: 100%;
     border-radius: .1rem;
   }
   .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content .am-grid-text {

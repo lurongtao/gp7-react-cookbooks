@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import CookBookUi from './CookBookUi'
 
 import { loadCategoriesDataAsync, loadListDataAsync } from '../actionCreator'
+import BScroll from 'better-scroll'
 
 const mapState = (state) => {
   return {
@@ -14,26 +15,36 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadCategories () {
-      dispatch(loadCategoriesDataAsync(dispatch))
+    loadCategories (scroll) {
+      dispatch(loadCategoriesDataAsync(dispatch, scroll))
     },
 
-    loadList () {
-      dispatch(loadListDataAsync(dispatch))
+    loadList (scroll) {
+      dispatch(loadListDataAsync(dispatch, scroll))
     }
   }
 }
 
 class CookBookContainer extends Component {
+  constructor () {
+    super()
+    this.getScrollId = this.getScrollId.bind(this)
+  }
+
   render () {
     return (
-      <CookBookUi {...this.props} ></CookBookUi>
+      <CookBookUi setScrollId={this.getScrollId} {...this.props} ></CookBookUi>
     )
   }
 
   componentDidMount () {
-    this.props.loadCategories()
-    this.props.loadList()
+    this.scroll = new BScroll(this.scrollId, {})
+    this.props.loadCategories(this.scroll)
+    this.props.loadList(this.scroll)
+  }
+
+  getScrollId (id) {
+    this.scrollId = id
   }
 }
 

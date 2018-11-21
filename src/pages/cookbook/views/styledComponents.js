@@ -2,6 +2,12 @@ import styled from 'styled-components'
 
 const HomeContainer = styled.div `
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  #cookbook-scroll {
+    flex: 1;
+    overflow-y: scroll;
+  }
 `
 
 const Header = styled.header `

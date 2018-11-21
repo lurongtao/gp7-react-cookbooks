@@ -14,22 +14,24 @@ export const loadListDataSync = (list) => {
   }
 }
 
-export const loadCategoriesDataAsync = (dispatch) => {
+export const loadCategoriesDataAsync = (dispatch, scroll) => {
   return () => {
-    fetch('/mock/cookbook-category.json')
+    fetch('/api/cookbook-category')
       .then(response => response.json())
       .then(result => {
         dispatch(loadCategoriesDataSync(result.data.category))
+        scroll.refresh()
       })
   }
 }
 
-export const loadListDataAsync = (dispatch) => {
+export const loadListDataAsync = (dispatch, scroll) => {
   return () => {
     fetch('/mock/cookbook-list.json')
       .then(response => response.json())
       .then(result => {
         dispatch(loadListDataSync(result.data))
+        scroll.refresh()
       })
   }
 }
