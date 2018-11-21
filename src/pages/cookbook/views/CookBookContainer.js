@@ -3,18 +3,23 @@ import { connect } from 'react-redux'
 
 import CookBookUi from './CookBookUi'
 
-import { loadDataAsync } from '../actionCreator'
+import { loadCategoriesDataAsync, loadListDataAsync } from '../actionCreator'
 
 const mapState = (state) => {
   return {
-    categories: state.cookbook.categories
+    categories: state.cookbook.categories,
+    list: state.cookbook.list
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     loadCategories () {
-      dispatch(loadDataAsync(dispatch))
+      dispatch(loadCategoriesDataAsync(dispatch))
+    },
+
+    loadList () {
+      dispatch(loadListDataAsync(dispatch))
     }
   }
 }
@@ -28,6 +33,7 @@ class CookBookContainer extends Component {
 
   componentDidMount () {
     this.props.loadCategories()
+    this.props.loadList()
   }
 }
 

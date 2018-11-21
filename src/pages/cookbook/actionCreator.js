@@ -1,18 +1,35 @@
-import { GET_CATEGORY_DATA } from './actionTypes'
+import { GET_CATEGORY_DATA, GET_LIST_DATA } from './actionTypes'
 
-export const loadDataSync = (categories) => {
+export const loadCategoriesDataSync = (categories) => {
   return {
     type: GET_CATEGORY_DATA,
     categories
   }
 }
 
-export const loadDataAsync = (dispatch) => {
+export const loadListDataSync = (list) => {
+  return {
+    type: GET_LIST_DATA,
+    list
+  }
+}
+
+export const loadCategoriesDataAsync = (dispatch) => {
   return () => {
     fetch('/mock/cookbook-category.json')
       .then(response => response.json())
       .then(result => {
-        dispatch(loadDataSync(result.data.category))
+        dispatch(loadCategoriesDataSync(result.data.category))
+      })
+  }
+}
+
+export const loadListDataAsync = (dispatch) => {
+  return () => {
+    fetch('/mock/cookbook-list.json')
+      .then(response => response.json())
+      .then(result => {
+        dispatch(loadListDataSync(result.data))
       })
   }
 }

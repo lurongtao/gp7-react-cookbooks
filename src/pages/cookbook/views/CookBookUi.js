@@ -2,7 +2,10 @@ import React from 'react'
 
 import Search from 'components/common/search/Search'
 
-import swiperImg from 'images/swiper-1.png'
+import HotMenuContainer from './hotmenu/HotMenuContainer'
+import BetterContainer from './better/BetterContainer'
+
+import Swiper from './swiper/SwiperContainer'
 
 import {
   HomeContainer,
@@ -15,16 +18,11 @@ export default (props) => {
     <HomeContainer>
       <Header>菜谱大全</Header>
       <SwiperContainer>
-        <img src={swiperImg} alt=""/>
+        <Swiper></Swiper>
       </SwiperContainer>
       <Search border={true}></Search>
-      <ul>
-        {
-          props.categories && Object.keys(props.categories).map((key) => {
-            return <li key={key}>{key}</li>
-          })
-        }
-      </ul>
+      <HotMenuContainer { ...props }></HotMenuContainer>
+      <BetterContainer></BetterContainer>
     </HomeContainer>
   )
 }
