@@ -38,7 +38,7 @@ class CookBookContainer extends Component {
   }
 
   componentDidMount () {
-    this.scroll = new BScroll(this.scrollId, {})
+    this.scroll = new BScroll(this.scrollId, {click: true})
     this.props.loadCategories(this.scroll)
     this.props.loadList(this.scroll)
   }

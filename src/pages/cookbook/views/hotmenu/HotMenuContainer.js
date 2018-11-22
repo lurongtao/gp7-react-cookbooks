@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { HotMenuWrap, Title } from './styledComponent.js'
 
+import { withRouter } from 'react-router-dom'
+
 import { Grid } from 'antd-mobile'
 
 class HotMenuContainer extends Component {
@@ -22,11 +24,11 @@ class HotMenuContainer extends Component {
         <Grid 
           data={data} 
           hasLine={false}
-          onClick={_el => console.log(_el)}
+          onClick={_el => this.props.history.push('/list')}
         />
       </HotMenuWrap>
     )
   }
 }
 
-export default HotMenuContainer
+export default withRouter(HotMenuContainer)

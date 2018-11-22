@@ -17,7 +17,7 @@ export class HomeContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'category',
+      selectedTab: 'cookbooks',
       fullScreen: true,
     }
   }
