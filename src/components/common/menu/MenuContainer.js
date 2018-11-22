@@ -14,7 +14,6 @@ import wrapperAnimate from 'components/highorder/wrapperAnimate'
 import BScroll from 'better-scroll'
 
 const getNavList = (state) => {
-  console.log(state.menu.from)
   if (state.menu.from === 'category') {
     return state.cookbook.categories || {}
   } else {
@@ -37,7 +36,6 @@ class MenuCategory extends Component {
     }
   }
   render () {
-    console.log(this.props.navList)
     return (
       <MenuList>
         <div ref={el => this.navListScroll = el}>

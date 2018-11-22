@@ -91,4 +91,6 @@ class MenuContainer extends Component {
   }
 }
 
-export default connect(null, mapDispatch)(withRouter(MenuContainer))
+// 当withRouter和connect相遇后，
+// withRouer要包裹connect
+export default withRouter(connect(null, mapDispatch)(MenuContainer))
