@@ -28,9 +28,12 @@ const Grid = styled.ul `
     flex-direction: column;
     padding: .1rem .1rem 0 0;
     > div:first-child {
-      
+      position: relative;
+      font-size: 0;
+      padding-bottom: 66.666667%;
     }
     > div:first-child img {
+      position: absolute;
       width: 100%;
     }
     > div:last-child {

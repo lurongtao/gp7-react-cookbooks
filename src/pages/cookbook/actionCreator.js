@@ -19,7 +19,7 @@ export const loadCategoriesDataAsync = (dispatch, scroll) => {
     fetch('/api/cookbook-category')
       .then(response => response.json())
       .then(result => {
-        dispatch(loadCategoriesDataSync(result.data.category))
+        dispatch(loadCategoriesDataSync(result.data))
         scroll.refresh()
       })
   }

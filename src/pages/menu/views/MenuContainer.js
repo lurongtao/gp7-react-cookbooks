@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Search from 'components/common/search/Search'
 import MenuCategory from './MenuCategory'
 import MenuMaterial from './MenuMaterial'
+
+import { CHANGE_FROM } from 'pages/menu/actionTypes'
 
 import { 
   Route,
@@ -16,6 +19,17 @@ import {
   MenuNavItem,
   MenuNavSlider
 } from './styledComponent.js'
+
+const mapDispatch = (dispatch) => {
+  return {
+    change (from) {
+      dispatch({
+        type: CHANGE_FROM,
+        from
+      })
+    }
+  }
+}
 
 class MenuContainer extends Component {
   constructor (props) {
@@ -72,7 +86,9 @@ class MenuContainer extends Component {
       dir === 'left' ? 'category' : 'material',
       { dir }
     )
+
+    this.props.change(dir === 'left' ? 'category' : 'material')
   }
 }
 
-export default withRouter(MenuContainer)
+export default connect(null, mapDispatch)(withRouter(MenuContainer))

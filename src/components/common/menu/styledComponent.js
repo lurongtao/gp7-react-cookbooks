@@ -8,6 +8,7 @@ const MenuWrapper = styled.div `
   background: #fff;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   > div:nth-child(3) {
     position: relative;
     flex: 1;
@@ -63,6 +64,11 @@ const MenuList = border({
     display: flex;
     width: 100%;
     position: absolute !important;
+    height: 100%;
+    > div {
+      height: 100%;
+      overflow: hidden;
+    }
   `,
   color: '#ddd',
   width: '1px 0 0 0'
@@ -88,8 +94,14 @@ const MenuListNavItem = styled.li `
 const MenuListContent = styled.div `
   flex: 1;
   padding: .2rem;
+  > div {
+    > div {
+    display: inline-block;
+    padding-bottom: .2rem;
+    padding-right: .2rem;
+  }
+  }
 `
-
 
 export {
   MenuWrapper,
