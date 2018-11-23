@@ -2,23 +2,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { BetterWrapper, Grid, Title } from './styledComponent.js'
+import { fromJS } from 'immutable' 
 
 const betterListGetter = (data) => {
   let betterList = data ? data.slice(0, 20) : []
   return betterList.map((value) => {
-    return {
-      icon: value.img,
-      id: value.id,
-      name: value.name,
-      all_click: `${value.all_click}浏览`,
-      favorites: `${value.favorites}收藏`,
-    }
+    return fromJS({
+      icon: value.get('img'),
+      id: value.get('id'),
+      name: value.get('name'),
+      img: value.get('img'),
+      all_click: `${value.get('all_click')}浏览`,
+      favorites: `${value.get('favorites')}收藏`,
+    })
   })
 }
 
 const mapState = (state) => {
   return {
-    betterList: betterListGetter(state.cookbook.list)
+    betterList: betterListGetter(state.getIn(['cookbook', 'list']))
   }
 }
 
@@ -31,15 +33,15 @@ class BetterContainer extends Component {
           {
             this.props.betterList.map((value) => {
               return (
-                <li key={value.id}>
+                <li key={value.get('id')}>
                   <div>
-                    <img src={value.icon} alt={value.name}/>
+                    <img src={value.get('img')} alt={value.get('name')}/>
                   </div>
                   <div>
-                    <h3>{value.name}</h3>
+                    <h3>{value.get('name')}</h3>
                     <p>
-                      <span>{value.all_click}</span>
-                      <span>{value.favorites}</span>
+                      <span>{value.get('all_click')}</span>
+                      <span>{value.get('favorites')}</span>
                     </p>
                   </div>
                 </li>

@@ -7,7 +7,6 @@ import { loadCategoriesDataAsync, loadListDataAsync } from '../actionCreator'
 import BScroll from 'better-scroll'
 
 const mapState = (state) => {
-  console.log(state)
   return {
     categories: state.getIn(['cookbook', 'categories']),
     list: state.getIn(['cookbook', 'list'])
