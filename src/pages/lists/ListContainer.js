@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import { PullToRefresh, ListView, NavBar, Icon } from 'antd-mobile';
 
-import { ListWrapper } from './styledComponent.js'
+import { ListWrapper, ListItem, EllipsisH2 } from './styledComponent.js'
+
+import { withRouter } from 'react-router-dom'
 
 const mapState = (state) => {
   return {
@@ -96,21 +98,28 @@ class List extends React.Component {
   };
 
   render() {
-    const separator = (sectionID, rowID) => (
-      <div
-        key={`${sectionID}-${rowID}`}
-        style={{
-          backgroundColor: '#F5F5F9',
-          height: 8,
-          borderTop: '1px solid #ECECED',
-          borderBottom: '1px solid #ECECED',
-        }}
-      />
-    );
+    // const separator = (sectionID, rowID) => (
+    //   <div
+    //     key={`${sectionID}-${rowID}`}
+    //     style={{
+    //       backgroundColor: '#F5F5F9',
+    //       height: 8,
+    //       borderTop: '1px solid #ECECED',
+    //       borderBottom: '1px solid #ECECED',
+    //     }}
+    //   />
+    // );
 
     const row = (rowData, sectionID, rowID) => {
       return (
-        <div key={rowID} style={{height: '100px'}}>{rowData.name}</div>
+        <ListItem key={rowID}>
+          <div><img src={rowData.img} alt=""/></div>
+          <div>
+            <h1>{rowData.name}</h1>
+            <EllipsisH2>{rowData.burdens}</EllipsisH2>
+            <h3>{rowData.all_click}浏览 {rowData.favorites}收藏</h3>
+          </div>
+        </ListItem>
       );
     };
     return (
@@ -119,7 +128,7 @@ class List extends React.Component {
         <NavBar
           mode="light"
           icon={<Icon type="left" />}
-          onLeftClick={() => console.log('onLeftClick')}
+          onLeftClick={() => this.props.history.go(-1)}
           rightContent={[
             <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
             <Icon key="1" type="ellipsis" />,
@@ -134,7 +143,6 @@ class List extends React.Component {
             {this.state.isLoading ? 'Loading...' : 'Loaded'}
           </div>)}
           renderRow={row}
-          renderSeparator={separator}
           useBodyScroll={this.state.useBodyScroll}
           style={this.state.useBodyScroll ? {} : {
             height: this.state.height,
@@ -153,4 +161,4 @@ class List extends React.Component {
   }
 }
 
-export default connect(mapState)(List)
+export default withRouter(connect(mapState)(List))

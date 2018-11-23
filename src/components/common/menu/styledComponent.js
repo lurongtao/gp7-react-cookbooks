@@ -94,6 +94,8 @@ const MenuListNavItem = styled.li `
 const MenuListContent = styled.div `
   flex: 1;
   padding: .2rem;
+  padding-top: 0;
+  margin-top: .2rem;
   > div {
     > div {
     display: inline-block;

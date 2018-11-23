@@ -13,6 +13,8 @@ import wrapperAnimate from 'components/highorder/wrapperAnimate'
 
 import BScroll from 'better-scroll'
 
+import { withRouter } from 'react-router-dom'
+
 const getNavList = (state) => {
   if (state.menu.from === 'category') {
     return state.cookbook.categories || {}
@@ -60,8 +62,8 @@ class MenuCategory extends Component {
         <MenuListContent ref={el => this.navContentScroll = el}>
           <div>
             {
-              this.state.navContent.map((v, i) => {
-                return <div key={randomString()}>{v.title || v}</div>
+              this.state.navContent && this.state.navContent.map((v, i) => {
+                return <div key={randomString()} onClick={() => this.props.history.push('/list')}>{v.title || v}</div>
               })
             }
           </div>
@@ -121,4 +123,4 @@ class MenuCategory extends Component {
   }
 }
 
-export default connect(mapState)(wrapperAnimate(MenuCategory))
+export default withRouter(connect(mapState)(wrapperAnimate(MenuCategory)))
