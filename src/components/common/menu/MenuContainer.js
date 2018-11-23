@@ -16,7 +16,7 @@ import BScroll from 'better-scroll'
 import { withRouter } from 'react-router-dom'
 
 const getNavList = (state) => {
-  if (state.menu.from === 'category') {
+  if (state.menu.get('from') === 'category') {
     return state.cookbook.categories || {}
   } else {
     return state.cookbook.material || {}

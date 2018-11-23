@@ -8,7 +8,7 @@ const swiperListGetter = (data) => {
 
 const mapState = (state) => {
   return {
-    swiperList: swiperListGetter(state.cookbook.list)
+    swiperList: swiperListGetter(state.getIn(['cookbook', 'list']))
   }
 }
 
@@ -19,7 +19,7 @@ class SwiperContainer extends Component {
           autoplay={true}
           infinite
         >
-          {this.props.swiperList.map(val => (
+          {this.props.swiperList.toJS().map(val => (
             <img
               key={val.id}
               src={val.img}
