@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import randomString from 'random-string'
+import { Map } from 'immutable'
 
 import { 
   MenuList,
@@ -17,9 +18,9 @@ import { withRouter } from 'react-router-dom'
 
 const getNavList = (state) => {
   if (state.getIn(['menu', 'from']) === 'category') {
-    return state.getIn(['cookbook', 'categories']) || {}
+    return state.getIn(['cookbook', 'categories']) || Map({})
   } else {
-    return state.getIn(['cookbook', 'material']) || {}
+    return state.getIn(['cookbook', 'material']) || Map({})
   }
 }
 
@@ -78,9 +79,9 @@ class MenuCategory extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log(nextProps)
+    console.log(nextProps.navList && nextProps.navList)
     this.setState({
-      navContent: nextProps.navList[Object.keys(nextProps.navList)[0]]
+      navContent: nextProps.navList && nextProps.navList
     }, () => {
       this.navcontentscroll.refresh()
     })
