@@ -8,8 +8,8 @@ import BScroll from 'better-scroll'
 
 const mapState = (state) => {
   return {
-    categories: state.cookbook.categories,
-    list: state.cookbook.list
+    categories: state.getIn(['cookbook', 'categories']),
+    list: state.getIn(['cookbook', 'list'])
   }
 }
 
@@ -38,7 +38,7 @@ class CookBookContainer extends Component {
   }
 
   componentDidMount () {
-    this.scroll = new BScroll(this.scrollId, {})
+    this.scroll = new BScroll(this.scrollId, {click: true})
     this.props.loadCategories(this.scroll)
     this.props.loadList(this.scroll)
   }

@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 
 import { HotMenuWrap, Title } from './styledComponent.js'
 
+import { withRouter } from 'react-router-dom'
+
 import { Grid } from 'antd-mobile'
 
 class HotMenuContainer extends Component {
   render () {
-    let data = this.props.categories && this.props.categories['热门'].slice(0, 11).map((value, index) => {
+    let data = this.props.categories && this.props.categories.get('热门').toJS().slice(0, 11).map((value, index) => {
       return {
         icon: value.img,
         text: value.title
@@ -22,11 +24,11 @@ class HotMenuContainer extends Component {
         <Grid 
           data={data} 
           hasLine={false}
-          onClick={_el => console.log(_el)}
+          onClick={_el => this.props.history.push('/list')}
         />
       </HotMenuWrap>
     )
   }
 }
 
-export default HotMenuContainer
+export default withRouter(HotMenuContainer)

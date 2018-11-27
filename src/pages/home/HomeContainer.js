@@ -13,11 +13,13 @@ import moreActive from 'images/more-active.png'
 import { CookBookContainer as CookBook } from 'pages/cookbook'
 import { MenuContainer as Menu } from 'pages/menu'
 
+import { withRouter } from 'react-router-dom'
+
 export class HomeContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'category',
+      selectedTab: 'cookbooks',
       fullScreen: true,
     }
   }
@@ -48,7 +50,8 @@ export class HomeContainer extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'cookbooks',
-              });
+              })
+              this.props.history.push('/home')
             }}
             data-seed="logId"
           >
@@ -75,7 +78,8 @@ export class HomeContainer extends Component {
             onPress={() => {
               this.setState({
                 selectedTab: 'category',
-              });
+              })
+              this.props.history.push('/home/category')
             }}
             data-seed="logId1"
           >
@@ -127,4 +131,4 @@ export class HomeContainer extends Component {
   }
 }
 
-export default HomeContainer
+export default withRouter(HomeContainer)

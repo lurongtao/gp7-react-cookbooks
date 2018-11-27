@@ -63,9 +63,9 @@ class MenuContainer extends Component {
         </MenuHeader>
         <Search bgcolor='#efefef'></Search>
         <div>
-          <Route path='/' exact children={props => <MenuCategory {...props} />}/>
-          <Route path='/category' children={props => <MenuCategory {...props} />}/>
-          <Route path='/material' children={props => <MenuMaterial {...props} />}/>
+          <Route path='/home' exact children={props => <MenuCategory {...props} />}/>
+          <Route path='/home/category' children={props => <MenuCategory {...props} />}/>
+          <Route path='/home/material' children={props => <MenuMaterial {...props} />}/>
         </div>
       </MenuWrapper>
     )
@@ -83,7 +83,7 @@ class MenuContainer extends Component {
     }, 300)
 
     this.props.history.push(
-      dir === 'left' ? 'category' : 'material',
+      dir === 'left' ? '/home/category' : '/home/material',
       { dir }
     )
 

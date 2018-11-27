@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import randomString from 'random-string'
+import { Map } from 'immutable'
 
 import { 
   MenuList,
@@ -13,11 +14,15 @@ import wrapperAnimate from 'components/highorder/wrapperAnimate'
 
 import BScroll from 'better-scroll'
 
+import { withRouter } from 'react-router-dom'
+
+// import { fromJS } from 'immutable'
+
 const getNavList = (state) => {
-  if (state.menu.from === 'category') {
-    return state.cookbook.categories || {}
+  if (state.getIn(['menu', 'from']) === 'category') {
+    return state.getIn(['cookbook', 'categories']) || Map({})
   } else {
-    return state.cookbook.material || {}
+    return state.getIn(['cookbook', 'material']) || Map({})
   }
 }
 
@@ -41,7 +46,7 @@ class MenuCategory extends Component {
         <div ref={el => this.navListScroll = el}>
           <MenuListNav>
             {
-              Object.keys(this.props.navList).map((v, i) => {
+              this.props.navList.keySeq().map((v, i) => {
                 return (
                   <MenuListNavItem 
                     key={v} 
@@ -60,8 +65,8 @@ class MenuCategory extends Component {
         <MenuListContent ref={el => this.navContentScroll = el}>
           <div>
             {
-              this.state.navContent.map((v, i) => {
-                return <div key={randomString()}>{v.title || v}</div>
+              this.state.navContent && this.state.navContent.map((v, i) => {
+                return <div key={randomString()} onClick={() => this.props.history.push('/list')}>{typeof(v) !== 'string' ? v.get('title') : v}</div>
               })
             }
           </div>
@@ -77,7 +82,7 @@ class MenuCategory extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.setState({
-      navContent: nextProps.navList[Object.keys(nextProps.navList)[0]]
+      navContent: nextProps.navList && nextProps.navList.first()
     }, () => {
       this.navcontentscroll.refresh()
     })
@@ -117,8 +122,10 @@ class MenuCategory extends Component {
   }
 
   filterNavList (key) {
-    return this.props.navList[key]
+    return this.props.navList.find((v, k) => {
+      return k === key
+    })
   }
 }
 
-export default connect(mapState)(wrapperAnimate(MenuCategory))
+export default withRouter(connect(mapState)(wrapperAnimate(MenuCategory)))
