@@ -16,6 +16,8 @@ import BScroll from 'better-scroll'
 
 import { withRouter } from 'react-router-dom'
 
+// import { fromJS } from 'immutable'
+
 const getNavList = (state) => {
   if (state.getIn(['menu', 'from']) === 'category') {
     return state.getIn(['cookbook', 'categories']) || Map({})
@@ -44,7 +46,7 @@ class MenuCategory extends Component {
         <div ref={el => this.navListScroll = el}>
           <MenuListNav>
             {
-              Object.keys(this.props.navList).map((v, i) => {
+              this.props.navList.keySeq().map((v, i) => {
                 return (
                   <MenuListNavItem 
                     key={v} 
@@ -64,7 +66,7 @@ class MenuCategory extends Component {
           <div>
             {
               this.state.navContent && this.state.navContent.map((v, i) => {
-                return <div key={randomString()} onClick={() => this.props.history.push('/list')}>{v.title || v}</div>
+                return <div key={randomString()} onClick={() => this.props.history.push('/list')}>{typeof(v) !== 'string' ? v.get('title') : v}</div>
               })
             }
           </div>
@@ -79,9 +81,8 @@ class MenuCategory extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps.navList && nextProps.navList)
     this.setState({
-      navContent: nextProps.navList && nextProps.navList
+      navContent: nextProps.navList && nextProps.navList.first()
     }, () => {
       this.navcontentscroll.refresh()
     })
@@ -121,7 +122,9 @@ class MenuCategory extends Component {
   }
 
   filterNavList (key) {
-    return this.props.navList[key]
+    return this.props.navList.find((v, k) => {
+      return k === key
+    })
   }
 }
 

@@ -16,7 +16,7 @@ export const loadListDataSync = (list) => {
 
 export const loadCategoriesDataAsync = (dispatch, scroll) => {
   return () => {
-    fetch('/api/cookbook-category')
+    fetch('/mock/cookbook-category.json')
       .then(response => response.json())
       .then(result => {
         dispatch(loadCategoriesDataSync(result.data))

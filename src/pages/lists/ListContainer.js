@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 
 const mapState = (state) => {
   return {
-    list: state.cookbook.list
+    list: state.getIn(['cookbook', 'list']).toJS()
   }
 }
 
